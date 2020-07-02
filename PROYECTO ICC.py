@@ -186,15 +186,6 @@ while juego:
             eneX_cambio[i] = -velocidad_horizontal
             ene_Y[i] += velocidad_vertical
 
-    for i in range(numero_enemigos):
-        if ene_Y[i] >= 550 and vida > 0:
-            vida -= 1
-        elif ene_Y[i] >= 550 and vida == 0:
-            for vm in range(numero_enemigos):
-                ene_Y[vm] = 4000
-            posY = 4000
-            fin_juego()
-
         # colision
         choque = colision(ene_X[i], ene_Y[i], laser_X, laser_Y)
         if choque and laser_Y<Alto-100:
@@ -226,7 +217,10 @@ while juego:
     if laser_state == 1:
         disparo(laser_X, laser_Y)
         laser_Y -= laserY_cambio
-
+        
+    if vida==0:
+        fin_juego()
+    
     player(posX, posY)
     mostrar_vidas(vidas_X, vidas_Y)
     mostrar_puntaje(texto_X, texto_Y)
